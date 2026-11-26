@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vinoth Kumar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Vinoth Kumar: AI engineer building RAG systems, AI agents and automations, with a fintech background.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one left-aligned column (max 68rem). Tinted hero band, AI projects, how I build, career (fintech), skills. */
+:root{
+  --bg:#fbfcfb; --band:#e6f2ec; --surface:#ffffff; --fg:#0f1a17; --muted:#46564f; --line:#d3ddd7;
+  --accent:#0a6b50; --accent-ink:#ffffff; --accent-soft:#d9eee4; --marigold:#8a5900; --marigold-soft:#f8ead0;
+  --shadow:0 1px 2px rgba(15,26,23,.05),0 8px 24px rgba(15,26,23,.06);
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --step--1:.8125rem; --step0:1rem; --step1:1.25rem; --step2:1.6rem; --step3:2.2rem; --step4:clamp(2.5rem,6vw,4.25rem);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1513; --band:#12201b; --surface:#151f1c; --fg:#e4ebe7; --muted:#9aaba4; --line:#26332f;
+  --accent:#4cc9a0; --accent-ink:#0e1513; --accent-soft:#163a2f; --marigold:#f0b54a; --marigold-soft:#3a2c10;
+  --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1513; --band:#12201b; --surface:#151f1c; --fg:#e4ebe7; --muted:#9aaba4; --line:#26332f;
+  --accent:#4cc9a0; --accent-ink:#0e1513; --accent-soft:#163a2f; --marigold:#f0b54a; --marigold-soft:#3a2c10;
+  --shadow:none; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:var(--step0);line-height:1.6}
+.wrap{max-width:68rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+p{margin:0}
+.label{font-family:var(--mono);font-size:var(--step--1);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+section{padding-block:3.5rem;border-top:1px solid var(--line);display:grid;gap:1.75rem}
+.wrap>section:first-child{border-top:none}
+.sec-head{display:grid;gap:.5rem;max-width:44rem}
+.sec-head h2{font-size:var(--step3);font-weight:700}
+.sec-head p{color:var(--muted)}
+
+/* Hero band */
+.band{background:var(--band);border-bottom:1px solid var(--line);margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+.topbar{display:flex;justify-content:flex-end;padding-top:1rem}
+.theme-btn{font:500 var(--step--1)/1 var(--mono);color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.5rem .85rem;cursor:pointer;display:inline-flex;gap:.4rem;align-items:center}
+.theme-btn:hover{border-color:var(--accent)}
+.hero{padding-block:2.5rem 3.5rem;display:grid;gap:1.4rem}
+.hero h1{font-size:var(--step4);font-weight:800;letter-spacing:-.02em}
+.hero .role{font-family:var(--mono);font-size:var(--step--1);color:var(--accent);letter-spacing:.04em;font-weight:500}
+.hero .thesis{font-size:var(--step1);max-width:40rem}
+.hero .seeking{max-width:40rem;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.5rem}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1rem;border-radius:6px;font-weight:600;text-decoration:none;border:1px solid var(--line);color:var(--fg);background:var(--surface)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:hover{border-color:var(--accent)}
+.facts{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;font-family:var(--mono);font-size:var(--step--1);color:var(--muted)}
+.facts b{color:var(--fg);font-weight:500}
+
+/* Loan journey */
+.journey{overflow-x:auto}
+.stages{display:grid;grid-template-columns:repeat(6,minmax(9.5rem,1fr));min-width:57rem}
+.stage{padding:1rem .9rem 1.1rem;border-top:3px solid var(--accent);display:grid;gap:.6rem;align-content:start}
+.stage h3{font-size:var(--step0);font-weight:700}
+.stage .code{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.stage p{font-size:var(--step--1);color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag{font-family:var(--mono);font-size:.72rem;font-weight:500;padding:.12rem .45rem;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+.tag.y{background:var(--marigold-soft);color:var(--marigold)}
+.legend{display:flex;gap:.75rem 1rem;flex-wrap:wrap;align-items:center;font-size:var(--step--1);color:var(--muted)}
+.approach{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.5rem 2rem}
+.approach>div{display:grid;gap:.5rem;align-content:start;border-top:3px solid var(--accent);padding-top:.9rem}
+.approach .code{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.approach h3{font-size:var(--step1);font-weight:700}
+.approach p{font-size:var(--step--1);color:var(--muted)}
+
+/* Work */
+.featured{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:clamp(1.25rem,3vw,2.25rem);display:grid;gap:1.5rem}
+.featured h3{font-size:var(--step2);font-weight:700}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2.5rem}
+.two>*{min-width:0}
+.kv{display:grid;gap:.35rem;align-content:start}
+.kv .label{color:var(--accent)}
+ul.clean{margin:0;padding-left:1.1rem;display:grid;gap:.3rem}
+.flow{overflow-x:auto;padding-bottom:.25rem}
+.flow-row{display:flex;align-items:stretch;gap:.5rem;min-width:44rem}
+.node{flex:1;border:1px solid var(--line);border-radius:6px;padding:.6rem .7rem;font-size:var(--step--1);background:var(--bg);display:grid;gap:.15rem}
+.node b{font-family:var(--mono);font-weight:500;font-size:.72rem;color:var(--muted)}
+.node.split{display:grid;gap:.4rem;background:none;border:none;padding:0}
+.arrow{align-self:center;color:var(--muted);font-family:var(--mono)}
+.stack{display:flex;flex-wrap:wrap;gap:.35rem}
+.stack span{font-family:var(--mono);font-size:.75rem;padding:.15rem .5rem;border:1px solid var(--line);border-radius:4px;color:var(--muted);background:var(--surface)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,24rem),1fr));gap:1.25rem}
+.card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:8px;box-shadow:var(--shadow);padding:1.1rem 1.2rem 1.25rem;display:grid;gap:.75rem;align-content:start}
+.card h3{font-size:var(--step1);font-weight:700}
+.card .why{font-size:var(--step--1);color:var(--muted);border-left:2px solid var(--accent);padding-left:.7rem}
+.card.wide{grid-column:1/-1}
+.card.wide .body{display:grid;grid-template-columns:1.3fr 1fr;gap:1rem 2rem}
+.card.wide .body>*{min-width:0}
+.mini-flow{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.mini-flow span{padding:.2rem .5rem;border-radius:4px;background:var(--accent-soft);color:var(--accent);font-weight:500}
+@media (max-width:720px){.card.wide .body{grid-template-columns:1fr}}
+.repo{font-family:var(--mono);font-size:var(--step--1);font-weight:500;word-break:break-all}
+.status{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--marigold)}
+
+/* Career */
+.job{display:grid;grid-template-columns:11rem 1fr;gap:1rem 2rem;padding-block:1.25rem;border-bottom:1px solid var(--line)}
+.job:last-child{border-bottom:none}
+.job>*{min-width:0}
+.job .when{font-family:var(--mono);font-size:var(--step--1);color:var(--muted);font-variant-numeric:tabular-nums}
+.job h3{font-size:var(--step1);font-weight:700}
+.job .org{color:var(--accent);font-weight:600}
+.job ul{margin-top:.5rem}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.5rem 2rem}
+.skills>div{display:grid;gap:.6rem;align-content:start}
+.skills h3{font-size:var(--step0);font-weight:700}
+
+footer{border-top:1px solid var(--line);padding-block:3rem 4rem;display:grid;gap:1rem}
+footer h2{font-size:var(--step3);font-weight:700}
+footer p{color:var(--muted);max-width:40rem}
+
+@media (max-width:720px){
+  .two{grid-template-columns:1fr}
+  .job{grid-template-columns:1fr;gap:.25rem}
+  section{padding-block:2.5rem}
+  .hero{padding-block:1.5rem 2.5rem}
+}
+@media (prefers-reduced-motion:no-preference){.btn,.theme-btn{transition:border-color .15s}}
+</style>
+</head>
+<body style="margin:0">
+
+<div class="band">
+  <div class="wrap">
+    <div class="topbar">
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch light or dark theme"><span id="theme-icon">◐</span><span id="theme-label">Theme</span></button>
+    </div>
+    <header class="hero">
+      <span class="role">AI ENGINEERING · RAG · AGENTS · AUTOMATION</span>
+      <h1>Vinoth Kumar</h1>
+      <p class="thesis">I build GenAI apps and automations: RAG systems, AI agents and n8n workflows. Before this I spent 8+ years in software, mostly in fintech, so I know how to take something from requirements to a working product.</p>
+      <p class="seeking">I'm looking for AI Engineer or AI implementation roles, in Chennai or Bengaluru. Fintech companies are a good fit too.</p>
+      <div class="facts">
+        <span><b>6</b> AI projects</span>
+        <span><b>RAG · agents · n8n</b></span>
+        <span><b>8+</b> years in software</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://www.linkedin.com/in/vinoth-kumar-a42b55141" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="#work">See my projects ↓</a>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section id="work" aria-labelledby="work-h">
+  <div class="sec-head">
+    <span class="label">Projects</span>
+    <h2 id="work-h">AI projects I've built</h2>
+    <p>All of these are on my GitHub. For most of them I wrote down the requirements first and then built it.</p>
+  </div>
+
+  <article class="featured">
+    <div class="sec-head">
+      <span class="label">Main project</span>
+      <h3>Scheme assistant for Tamil Nadu farmers</h3>
+      <p>A chat assistant where a farmer can ask in Tamil or English and find out which state and central schemes they can apply for.</p>
+    </div>
+    <div class="two">
+      <div class="kv">
+        <span class="label">Why I built it</span>
+        <p>Scheme details are spread across many government sites and PDFs, mostly in English. If a farmer asks a simple question in Tamil, it's hard to get a clear answer on eligibility, subsidy amount or which documents to bring.</p>
+      </div>
+      <div class="kv">
+        <span class="label">What it does</span>
+        <ul class="clean">
+          <li>I wrote a BRD first and built from that.</li>
+          <li>Ask in Tamil or English, get the answer in the same language.</li>
+          <li>Choose Tamil Nadu schemes, central schemes, or both.</li>
+          <li>Search uses both meaning and keywords, so scheme names and local words still match.</li>
+          <li>A knowledge graph suggests related schemes. If it's down, normal search still works.</li>
+          <li>Upload land records or certificates to check eligibility.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="kv">
+      <span class="label">How a question flows</span>
+      <div class="flow">
+        <div class="flow-row" role="img" aria-label="Question goes to a language and jurisdiction router, then to Tamil Nadu and central indexes, then rank fusion, then a Tamil or English answer">
+          <div class="node"><b>INPUT</b>Farmer's question or document</div>
+          <span class="arrow">→</span>
+          <div class="node"><b>ROUTER</b>Language &amp; state or central</div>
+          <span class="arrow">→</span>
+          <div class="node split">
+            <div class="node"><b>INDEX</b>Tamil Nadu schemes</div>
+            <div class="node"><b>INDEX</b>Central schemes</div>
+          </div>
+          <span class="arrow">→</span>
+          <div class="node"><b>SEARCH</b>FAISS + BM25, ranked together</div>
+          <span class="arrow">→</span>
+          <div class="node"><b>ANSWER</b>Tamil or English</div>
+        </div>
+      </div>
+    </div>
+    <div class="stack"><span>Python</span><span>LangChain</span><span>FAISS</span><span>BM25</span><span>Neo4j</span><span>LangSmith</span><span>Streamlit</span><span>pytest</span></div>
+    <div class="actions">
+      <a class="btn" href="https://github.com/vino2203/tn-agri-schemes-assistant" target="_blank" rel="noopener">Code: tn-agri-schemes-assistant ↗</a>
+      <a class="btn" href="https://github.com/vino2203/scheme-knowledge-graph" target="_blank" rel="noopener">Knowledge graph: scheme-knowledge-graph ↗</a>
+    </div>
+  </article>
+
+  <div class="cards">
+    <article class="card wide">
+      <span class="label">Personal AI agent</span>
+      <h3>Telegram bot that runs Claude on my Mac</h3>
+      <p class="status">NEW · WORKING</p>
+      <div class="body">
+        <div style="display:grid;gap:.75rem">
+          <p>I send a message to my own Telegram bot. n8n on my Mac picks it up and passes it to Claude Code, which answers using my Claude Pro subscription. Claude can search the web, so it can handle things like the weather today or the latest version of a tool. In my last test the reply came back in about 5 seconds.</p>
+          <div class="mini-flow" role="img" aria-label="Telegram message, then a filter for my chat only, then n8n, then Claude Code, then the reply on Telegram"><span>Telegram</span>→<span>Only my chat</span>→<span>n8n</span>→<span>Claude Code</span>→<span>Reply</span></div>
+        </div>
+        <div style="display:grid;gap:.75rem;align-content:start">
+          <p class="why">Only my chat can use it. Messages from anyone else, and anything that isn't text, are dropped before they reach Claude. There's no API bill, it runs on the subscription I already pay for.</p>
+          <p class="why">Getting it working taught me a lot: Telegram webhooks through a tunnel, n8n's newer publish flow, and a bug where my message reached Claude empty.</p>
+        </div>
+      </div>
+      <div class="stack"><span>n8n</span><span>Claude Code</span><span>Telegram Bot API</span><span>Cloudflare Tunnel</span><span>Webhooks</span></div>
+    </article>
+    <article class="card">
+      <span class="label">RAG with self-checks</span>
+      <h3>Document Q&amp;A that checks its own answers</h3>
+      <p>You ask questions about a PDF. Before it answers, it checks whether what it found is relevant and whether the answer actually comes from the document. If not, it tries again. If the question has nothing to do with the document, it says so.</p>
+      <p class="why">I added tests that score the answers against a fixed set of questions, so I can see if a change makes it better or worse.</p>
+      <div class="stack"><span>LangGraph</span><span>Neo4j</span><span>FAISS</span><span>DeepEval</span><span>FastAPI</span><span>Docker</span></div>
+      <a class="repo" href="https://github.com/vino2203/self-rag-graphrag-eval" target="_blank" rel="noopener">github.com/vino2203/self-rag-graphrag-eval ↗</a>
+    </article>
+    <article class="card">
+      <span class="label">Multi-agent support</span>
+      <h3>Customer support bot with three agents</h3>
+      <p>One agent searches the company's documents, one searches the web, and one saves the conversation for later. A lead agent puts their answers together into one reply.</p>
+      <p class="why">Each agent's answer shows a confidence score and the exact document and page it came from, so you can see why the bot said what it said.</p>
+      <div class="stack"><span>CrewAI</span><span>FAISS</span><span>Neo4j</span><span>SerpAPI</span><span>Streamlit</span></div>
+      <a class="repo" href="https://github.com/vino2203/crewai-support-agents" target="_blank" rel="noopener">github.com/vino2203/crewai-support-agents ↗</a>
+    </article>
+    <article class="card">
+      <span class="label">n8n automations</span>
+      <h3>Four n8n workflows</h3>
+      <p>A Telegram voice assistant that understands voice notes, searches the web, sends emails and replies by voice. A CSV cleaner that sorts student records into valid and invalid Excel files. A Telegram bot that writes fee reminders from Google Sheets. A Slack bot that replies in the thread.</p>
+      <p class="why">I like these because a business team can open them, see how they work and change them without writing code.</p>
+      <div class="stack"><span>n8n</span><span>OpenAI</span><span>Whisper</span><span>Telegram</span><span>Slack</span><span>Google Sheets</span><span>Gmail</span></div>
+      <a class="repo" href="https://github.com/vino2203/n8n-genai-automations" target="_blank" rel="noopener">github.com/vino2203/n8n-genai-automations ↗</a>
+    </article>
+    <article class="card">
+      <span class="label">Workflow automation</span>
+      <h3>Job search assistant</h3>
+      <p class="status">STILL BUILDING</p>
+      <p>It finds jobs on different job sites, scores them, helps tailor my applications, and turns my GitHub work into LinkedIn posts. Nothing gets sent until I approve it.</p>
+      <p class="why">I kept a manual approval step on purpose. I don't want it applying or posting anything without me checking first.</p>
+      <div class="stack"><span>Agents</span><span>Approval step</span><span>Gmail tracking</span></div>
+      <a class="repo" href="https://github.com/vino2203/LinkedIn-Automation" target="_blank" rel="noopener">github.com/vino2203/LinkedIn-Automation ↗</a>
+    </article>
+  </div>
+</section>
+
+<section aria-labelledby="how-h">
+  <div class="sec-head">
+    <span class="label">How I work</span>
+    <h2 id="how-h">How I build AI apps</h2>
+    <p>The same few habits show up in every project above.</p>
+  </div>
+  <div class="approach">
+    <div><span class="code">01</span><h3>Start with the requirement</h3><p>I write down who it's for and what a good answer looks like before I touch code. The farmer assistant started as a BRD.</p></div>
+    <div><span class="code">02</span><h3>Get retrieval right</h3><p>Most bad answers come from bad search. I mix vector search, keyword search (BM25) and a Neo4j knowledge graph so the right text actually comes back.</p></div>
+    <div><span class="code">03</span><h3>Measure the answers</h3><p>Coming from testing, I don't trust "looks fine". I score answers for relevance and faithfulness with DeepEval and trace runs in LangSmith.</p></div>
+    <div><span class="code">04</span><h3>Keep a person in control</h3><p>Guardrails for off-topic questions, citations so you can check the source, and an approval step before anything gets sent.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="exp-h">
+  <div class="sec-head">
+    <span class="label">Experience</span>
+    <h2 id="exp-h">Where I've worked</h2>
+    <p>My day jobs have been in fintech, mostly digital lending. That's where I learned to ship software that real customers depend on.</p>
+  </div>
+  <div>
+    <div class="job">
+      <span class="when">Nov 2025 – now</span>
+      <div>
+        <h3>Application Engineer</h3>
+        <span class="org">FinBox · Bengaluru</span>
+        <ul class="clean">
+          <li>I set up FinBox's lending platform for our lending clients, from requirements to go-live.</li>
+          <li>I write the BRDs and configure the loan workflows for each client.</li>
+          <li>I'm the client's technical point of contact, and I do the end-to-end testing before launch.</li>
+          <li>I look for places where GenAI and RAG can cut manual work in implementation.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="job">
+      <span class="when">Before FinBox</span>
+      <div>
+        <h3>Senior Quality Engineer</h3>
+        <span class="org">Yubi</span>
+        <ul class="clean">
+          <li>I designed how we automate testing for the loan origination and loan management systems.</li>
+          <li>I built end-to-end regression tests with mocks, so we could test full loan flows without the partners' live systems.</li>
+          <li>I built an API test framework driven by YAML files, running with Postman and Newman.</li>
+          <li>I covered integrations for 8 lending partners and used New Relic to keep an eye on production.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="job">
+      <span class="when">Earlier</span>
+      <div>
+        <h3>Release Engineer</h3>
+        <span class="org">Test Yantra</span>
+        <ul class="clean"><li>Release and testing work on the MPL gaming app.</li></ul>
+      </div>
+    </div>
+    <div class="job">
+      <span class="when">2018 – 2021</span>
+      <div>
+        <h3>ERP role</h3>
+        <span class="org">ZIAFA</span>
+        <ul class="clean"><li>Worked on ERP systems.</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="legend"><span class="label">Lending domain</span><div class="stack"><span>Loan origination (LOS)</span><span>Loan management (LMS)</span><span>KYC &amp; bureau</span><span>Underwriting rules</span><span>Disbursal</span><span>Servicing</span><span>8 lending partners</span></div></div>
+</section>
+
+<section aria-labelledby="skills-h">
+  <div class="sec-head">
+    <span class="label">Skills</span>
+    <h2 id="skills-h">What I work with</h2>
+  </div>
+  <div class="skills">
+    <div><h3>LLM apps</h3><div class="stack"><span>OpenAI</span><span>Claude / Claude Code</span><span>Gemini</span><span>Prompt engineering</span><span>Whisper</span><span>Python</span></div></div>
+    <div><h3>RAG &amp; knowledge graphs</h3><div class="stack"><span>LangChain</span><span>FAISS</span><span>BM25</span><span>Hybrid search</span><span>Neo4j</span><span>GraphRAG</span></div></div>
+    <div><h3>Agents</h3><div class="stack"><span>LangGraph</span><span>CrewAI</span><span>AutoGen</span><span>Tool calling</span><span>Memory</span></div></div>
+    <div><h3>Evaluation</h3><div class="stack"><span>DeepEval</span><span>LangSmith</span><span>pytest</span><span>Golden datasets</span></div></div>
+    <div><h3>Shipping it</h3><div class="stack"><span>FastAPI</span><span>Streamlit</span><span>Docker</span><span>REST APIs</span></div></div>
+    <div><h3>Automation</h3><div class="stack"><span>n8n</span><span>Playwright</span><span>PyAutoGUI</span><span>Telegram / Slack bots</span></div></div>
+    <div><h3>Fintech &amp; delivery</h3><div class="stack"><span>LOS / LMS</span><span>BRDs</span><span>Client implementation</span><span>UAT &amp; go-live</span></div></div>
+    <div><h3>Testing</h3><div class="stack"><span>API automation</span><span>Postman / Newman</span><span>Mocking</span><span>New Relic</span><span>ISTQB</span></div></div>
+  </div>
+</section>
+
+<footer>
+  <h2>Get in touch</h2>
+  <p>If your team is building with AI, or wants to start, I'd be happy to talk. Fintech teams especially. LinkedIn is the easiest way to reach me.</p>
+  <div class="actions">
+    <a class="btn primary" href="https://www.linkedin.com/in/vinoth-kumar-a42b55141" target="_blank" rel="noopener">Message me on LinkedIn</a>
+    <a class="btn" href="https://github.com/vino2203" target="_blank" rel="noopener">github.com/vino2203</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme-btn'), label=document.getElementById('theme-label'), icon=document.getElementById('theme-icon');
+  function current(){
+    var t=root.getAttribute('data-theme');
+    if(t==='light'||t==='dark') return t;
+    return (window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+  }
+  function show(){
+    var t=current();
+    label.textContent=t==='dark'?'Light mode':'Dark mode';
+    icon.textContent=t==='dark'?'☀':'☾';
+  }
+  try{var saved=localStorage.getItem('vk-theme'); if(saved==='light'||saved==='dark') root.setAttribute('data-theme',saved);}catch(e){}
+  show();
+  btn.addEventListener('click',function(){
+    var next=current()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('vk-theme',next);}catch(e){}
+    show();
+  });
+  if(window.matchMedia){var mq=window.matchMedia('(prefers-color-scheme: dark)'); if(mq.addEventListener) mq.addEventListener('change',show);}
+})();
+</script>
+</body>
+</html>
